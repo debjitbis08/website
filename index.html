@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Debjit Biswas</title>
+  <meta name="description" content="The digital home of Debjit Biswas">
+
+  <link rel="canonical" href="https://debjitbiswas.com/">
+  <style>
+        @font-face {
+            font-family: "Bellefair-Regular";
+            src: url("/assets/fonts/bellefair/Bellefair-Regular.otf")
+        }
+  </style>
+  
+</head>
+<body>
+    <h1>Debjit's digital home</h1>
+
+    <p>
+        Hello! Nice to see you here. I am not sure how you landed here, but make youself
+        comfortable and hopefully you will find something to enjoy.
+    </p>
+    <p>
+        If you want to contact me,
+        <ul>
+            <li>You can mail me at debjit (at) fastmail (dot) fm</li>
+            <li>Or, drop me a encrypted message at <a href="https://keybase.io/debjit">https://keybase.io/debjit</a></li>
+            <li>You can also DM me on twitter at <a href="https://twitter.com/debjitbis08">@debjitbis08</a></li>
+        </ul>
+    </p>
+
+    <p>
+        Some interesting things to do here can be,
+        <ul>
+            <li><a href="blog/">Reading my posts</a></li>
+            <li>Looking at cartoons I draw</li>
+            <li>
+                Hovering on the wheel below to see it rotate.
+            <div class="moire">
+                <!-- <div class="moire__horizontal"></div> -->
+                <!-- <div class="moire__vertical"></div> -->
+                <div class="moire__wheel-1">
+                    <div class="moire__spoke moire__spoke-1"></div>
+                    <div class="moire__spoke moire__spoke-2"></div>
+                    <div class="moire__spoke moire__spoke-3"></div>
+                    <div class="moire__spoke moire__spoke-4"></div>
+                    <div class="moire__spoke moire__spoke-5"></div>
+                    <div class="moire__spoke moire__spoke-6"></div>
+                    <div class="moire__spoke moire__spoke-7"></div>
+                    <div class="moire__spoke moire__spoke-8"></div>
+                    <div class="moire__spoke moire__spoke-9"></div>
+                    <div class="moire__spoke moire__spoke-10"></div>
+                    <div class="moire__spoke moire__spoke-11"></div>
+                    <div class="moire__spoke moire__spoke-12"></div>
+                    <div class="moire__spoke moire__spoke-13"></div>
+                    <div class="moire__spoke moire__spoke-14"></div>
+                    <div class="moire__spoke moire__spoke-15"></div>
+                    <div class="moire__spoke moire__spoke-16"></div>
+                    <div class="moire__spoke moire__spoke-17"></div>
+                    <div class="moire__spoke moire__spoke-18"></div>
+                    <div class="moire__spoke moire__spoke-19"></div>
+                    <div class="moire__spoke moire__spoke-20"></div>
+                    <div class="moire__spoke moire__spoke-21"></div>
+                </div>
+                <div class="moire__wheel-2">
+                    <div class="moire__spoke moire__spoke-1"></div>
+                    <div class="moire__spoke moire__spoke-2"></div>
+                    <div class="moire__spoke moire__spoke-3"></div>
+                    <div class="moire__spoke moire__spoke-4"></div>
+                    <div class="moire__spoke moire__spoke-5"></div>
+                    <div class="moire__spoke moire__spoke-6"></div>
+                    <div class="moire__spoke moire__spoke-7"></div>
+                    <div class="moire__spoke moire__spoke-8"></div>
+                    <div class="moire__spoke moire__spoke-9"></div>
+                    <div class="moire__spoke moire__spoke-10"></div>
+                    <div class="moire__spoke moire__spoke-11"></div>
+                    <div class="moire__spoke moire__spoke-12"></div>
+                    <div class="moire__spoke moire__spoke-13"></div>
+                    <div class="moire__spoke moire__spoke-14"></div>
+                    <div class="moire__spoke moire__spoke-15"></div>
+                    <div class="moire__spoke moire__spoke-16"></div>
+                    <div class="moire__spoke moire__spoke-17"></div>
+                    <div class="moire__spoke moire__spoke-18"></div>
+                    <div class="moire__spoke moire__spoke-19"></div>
+                    <div class="moire__spoke moire__spoke-20"></div>
+                    <div class="moire__spoke moire__spoke-21"></div>
+                </div>
+            </div>
+            </li>
+        </ul>
+    </p>
+
+    <style>
+        body {
+            font-family: "Bellefair-Regular", Arial;
+            font-size: 24px;
+        }
+        .moire {
+            position: relative;
+            overflow: hidden;
+            height: 400px;
+            width: 400px;
+            transform: scale(0.3);
+            transform-origin: 0 0;
+        }
+
+        .moire__horizontal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 400px;
+            width: 400px;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(136, 136, 136, 0.3),
+                rgba(136, 136, 136, 0.3) 3px,
+                #333 3px,
+                #333 6px
+            );
+        }
+
+        .moire__vertical {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 800px;
+            width: 800px;
+            background: repeating-linear-gradient(
+                90deg,
+                rgba(136, 136, 136, 0.3),
+                rgba(136, 136, 136, 0.3) 3px,
+                #333 3px,
+                #333 6px
+            );
+            animation: rotate 10s ease-in-out 1s alternate infinite;
+        }
+        @keyframes rotate {
+            from {transform: rotate(0deg)}
+            to {transform: rotate(360deg)}
+        }
+
+        .moire__wheel-1 {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            height: 350px;
+            width: 350px;
+            border-radius: 400px;
+            border: 3px solid #333;
+            animation: rotate 2s linear 15;
+        }
+
+        .moire__wheel-2 {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            height: 350px;
+            width: 350px;
+            border-radius: 400px;
+            border: 3px solid #333;
+            animation: rotate 2s linear 15;
+        }
+
+        .moire:hover .moire__wheel-1,
+        .moire:hover .moire__wheel-2 {
+            animation: rotate 2s linear infinite;
+        }
+
+        .moire__spoke {
+            position: absolute;
+            top: 0;
+            left: calc(50% - 1.5px);
+            height: 350px;
+            width: 3px;
+            background: #333;
+        }
+
+        .moire__spoke-1  { transform: rotate(17.14deg); }
+        .moire__spoke-2  { transform: rotate(34.28deg); }
+        .moire__spoke-3  { transform: rotate(51.42deg); }
+        .moire__spoke-4  { transform: rotate(68.56deg); }
+        .moire__spoke-5  { transform: rotate(85.70deg); }
+        .moire__spoke-6  { transform: rotate(102.84deg); }
+        .moire__spoke-7  { transform: rotate(119.98deg); }
+        .moire__spoke-8  { transform: rotate(137.12deg); }
+        .moire__spoke-9  { transform: rotate(154.26deg); }
+        .moire__spoke-10 { transform: rotate(171.40deg); }
+        .moire__spoke-11 { transform: rotate(188.54deg); }
+        .moire__spoke-12 { transform: rotate(205.68deg); }
+        .moire__spoke-13 { transform: rotate(222.82deg); }
+        .moire__spoke-14 { transform: rotate(239.96deg); }
+        .moire__spoke-15 { transform: rotate(257.10deg); }
+        .moire__spoke-16 { transform: rotate(274.24deg); }
+        .moire__spoke-17 { transform: rotate(291.38deg); }
+        .moire__spoke-18 { transform: rotate(308.52deg); }
+        .moire__spoke-19 { transform: rotate(325.66deg); }
+        .moire__spoke-20 { transform: rotate(342.80deg); }
+        .moire__spoke-21 { transform: rotate(360deg); }
+    </style>
+</body>
+</html>

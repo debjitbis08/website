@@ -57,4 +57,4 @@ There may be frameworks that provide all this and an opinionated structure. We w
 
 A developer in the future will be able to choose a view engine based on their requirements. The engine may use the virtual DOM concept or may use something that we have not yet thought of, because _virtual DOM is just a strategy_, which can be replaced by any other better strategy, maybe even at runtime.
 
-**Update**: [Incremental DOM](https://github.com/google/incremental-dom/), an alternative to Virtual DOM.`
+**Update**: [Incremental DOM](https://github.com/google/incremental-dom/), an alternative to Virtual DOM.
