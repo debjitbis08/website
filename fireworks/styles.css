@@ -1,0 +1,21 @@
+html, body {
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+#fireworks-container {
+    background: #111116;
+    height: 100%;
+    position: relative;
+}
+
+.particle {
+    position: absolute;
+}
+
+.blast-radius {
+    border: 1px solid #FFF;
+    position: absolute;
+}
