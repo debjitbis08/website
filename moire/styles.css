@@ -15,7 +15,8 @@ section {
 
 #circles-on-horizontal-lines {
     margin: 0 auto;
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     height: 400px;
     position: relative;
     overflow: hidden;
@@ -37,14 +38,17 @@ section {
 }
 
 .controls {
+    margin-top: 10px;
     text-align: center;
 }
 
 #circles-on-circles {
     height: 400px;
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     position: relative;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 #circles-on-circles .first-set {
