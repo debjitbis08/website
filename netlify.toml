@@ -6,3 +6,6 @@
   to = "https://elgamal.netlify.com/:splat"
   status = 200
 
+  from = "/base64/*"
+  to = "https://base64-dencoder.netlify.com/:splat"
+  status = 200
