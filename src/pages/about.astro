@@ -1,0 +1,20 @@
+---
+import { Image } from "astro:assets";
+import aboutImg from "@/assets/about-astro.png";
+import PageLayout from "@/layouts/Base.astro";
+
+const meta = {
+	description: "These are the random thoughts of Debjit Biswas",
+	title: "About",
+};
+---
+
+<PageLayout meta={meta}>
+	<div class="space-y-6">
+		<h1 class="title">About</h1>
+		<p>
+			This is my little corner of the internet where I jot down my thoughts. I am not a regular &
+			don't want to be, but I try to share whenever some compelling thought comes to my mind.
+		</p>
+	</div>
+</PageLayout>

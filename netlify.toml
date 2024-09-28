@@ -1,12 +1,2 @@
-[Settings]
-  ID = "a9763eda-5273-4ef4-a35e-8e9f45b7fc4f"
-
-[[redirects]]
-  from = "/elgamal/*"
-  to = "https://elgamal.netlify.com/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/base64/*"
-  to = "https://base64-dencoder.netlify.com/:splat"
-  status = 200
+[build]
+  command = 'pnpm build'

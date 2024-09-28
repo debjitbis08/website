@@ -1,0 +1,83 @@
+---
+import SocialList from "@/components/SocialList.astro";
+import PostPreview from "@/components/blog/PostPreview.astro";
+import { getAllPosts, sortMDByDate } from "@/data/post";
+import PageLayout from "@/layouts/Base.astro";
+
+const MAX_POSTS = 10;
+const allPosts = await getAllPosts();
+const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
+
+const projects: { desc: string; href: string; title: string }[] = [
+	{
+		desc: "Web based 8085 emulator.",
+		href: "https://www.sim8085.com",
+		title: "Sim8085",
+	},
+	{
+		desc: "Dice generated passphrases & random strings.",
+		href: "https://diceware.debjitbiswas.com",
+		title: "Diceware",
+	},
+	{
+		desc: "Reactive frontend framework designed for building small applications. (WIP)",
+		href: "https://github.com/debjitbis08/frdp",
+		title: "FRDP",
+	},
+	{
+		desc: "A one page application to understand how Elgamal encryption works.",
+		href: "https://www.debjitbiswas.com/elgamal/",
+		title: "ElGamal Playground",
+	},
+];
+---
+
+<PageLayout meta={{ title: "Home" }}>
+	<section>
+		<h1 class="title mb-6">Hello Friend!</h1>
+		<p class="mb-4">
+			Nice to see you here! I am not sure how you landed here, but make youself comfortable and
+			hopefully you will find something to enjoy.
+		</p>
+		<SocialList />
+	</section>
+	<section aria-label="Blog post list" class="mt-16">
+		<h2 class="title mb-4 text-xl">Posts</h2>
+		<ul class="space-y-4">
+			{
+				allPostsByDate.map((p) => (
+					<li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&_q]:col-start-2">
+						{/* @ts-ignore-next-line - issue with -> @astrojs/check@0.9.3 */}
+						<PostPreview post={p} />
+					</li>
+				))
+			}
+		</ul>
+	</section>
+	<section class="mt-16">
+		<h2 class="title mb-4 text-xl">Projects</h2>
+		<dl class="space-y-4">
+			{
+				projects.map(({ desc, href, title }) => (
+					<div class="flex flex-col gap-2 sm:flex-row">
+						<dt>
+							<span class="flex">
+								<a
+									class="cactus-link max-w-20 overflow-hidden text-ellipsis whitespace-nowrap text-nowrap"
+									href={href}
+									rel="noreferrer"
+									target="_blank"
+									title={title}
+								>
+									{title}
+								</a>
+								:
+							</span>
+						</dt>
+						<dd>{desc}</dd>
+					</div>
+				))
+			}
+		</dl>
+	</section>
+</PageLayout>

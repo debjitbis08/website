@@ -1,0 +1,435 @@
+---
+import { menuLinks } from "@/site-config";
+import Search from "../Search.astro";
+import ThemeToggle from "../ThemeToggle.astro";
+
+const url = new URL(Astro.request.url);
+---
+
+<header class="group relative mb-28 flex items-center sm:ps-[4.5rem]" id="main-header">
+	<div class="flex items-center gap-2">
+		<a
+			aria-current={url.pathname === "/" ? "page" : false}
+			class="position-relative inline-flex items-center grayscale hover:filter-none sm:relative sm:inline-block"
+			href="/"
+		>
+			<div id="logo">
+				<!-- The "d" shape -->
+				<div id="d">
+					<div class="one box">
+						<div class="box__face box__face--front"></div>
+						<div class="box__face box__face--left"></div>
+						<div class="box__face box__face--top"></div>
+					</div>
+					<div class="two box">
+						<div class="box__face box__face--front"></div>
+						<div class="box__face box__face--left"></div>
+						<div class="box__face box__face--top"></div>
+					</div>
+					<div class="three box">
+						<div class="box__face box__face--front"></div>
+						<div class="box__face box__face--left"></div>
+						<div class="box__face box__face--top"></div>
+					</div>
+					<div class="four box">
+						<div class="box__face box__face--front"></div>
+						<div class="box__face box__face--left"></div>
+						<div class="box__face box__face--top"></div>
+					</div>
+				</div>
+				<div id="b">
+					<div class="one box">
+						<div class="box__face box__face--front"></div>
+						<div class="box__face box__face--left"></div>
+						<div class="box__face box__face--top"></div>
+					</div>
+					<div class="two box">
+						<div class="box__face box__face--front"></div>
+						<div class="box__face box__face--left"></div>
+						<div class="box__face box__face--top"></div>
+					</div>
+					<div class="three box">
+						<div class="box__face box__face--front"></div>
+						<div class="box__face box__face--left"></div>
+						<div class="box__face box__face--top"></div>
+					</div>
+					<div class="four box">
+						<div class="box__face box__face--front"></div>
+						<div class="box__face box__face--left"></div>
+						<div class="box__face box__face--top"></div>
+					</div>
+				</div>
+			</div>
+		</a>
+		<nav
+			aria-label="Main menu"
+			class="absolute -inset-x-4 top-14 hidden flex-col items-end gap-y-4 rounded-md bg-bgColor/[.85] py-4 text-accent shadow backdrop-blur group-[.menu-open]:z-50 group-[.menu-open]:flex sm:static sm:z-auto sm:-ms-4 sm:mt-1 sm:flex sm:flex-row sm:items-center sm:divide-x sm:divide-dashed sm:divide-accent sm:rounded-none sm:bg-transparent sm:py-0 sm:shadow-none sm:backdrop-blur-none"
+			id="navigation-menu"
+		>
+			{
+				menuLinks.map((link) => (
+					<a
+						aria-current={url.pathname === link.path ? "page" : false}
+						class="px-4 py-4 underline-offset-2 sm:py-0 sm:hover:underline"
+						data-astro-prefetch
+						href={link.path}
+					>
+						{link.title}
+					</a>
+				))
+			}
+		</nav>
+	</div>
+	<Search />
+	<ThemeToggle />
+	<mobile-button>
+		<button
+			aria-expanded="false"
+			aria-haspopup="menu"
+			aria-label="Open main menu"
+			class="group relative ms-4 h-7 w-7 sm:invisible sm:hidden"
+			id="toggle-navigation-menu"
+			type="button"
+		>
+			<svg
+				aria-hidden="true"
+				class="absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 transition-all group-aria-expanded:scale-0 group-aria-expanded:opacity-0"
+				fill="none"
+				focusable="false"
+				id="line-svg"
+				stroke="currentColor"
+				stroke-width="1.5"
+				viewBox="0 0 24 24"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path d="M3.75 9h16.5m-16.5 6.75h16.5" stroke-linecap="round" stroke-linejoin="round"
+				></path>
+			</svg>
+			<svg
+				aria-hidden="true"
+				class="absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 scale-0 text-accent opacity-0 transition-all group-aria-expanded:scale-100 group-aria-expanded:opacity-100"
+				class="text-accent"
+				fill="none"
+				focusable="false"
+				id="cross-svg"
+				stroke="currentColor"
+				stroke-width="1.5"
+				viewBox="0 0 24 24"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+			</svg>
+		</button>
+	</mobile-button>
+</header>
+
+<style>
+	#logo {
+		position: absolute;
+		top: -60px;
+		left: -90px;
+		perspective: 500px;
+		padding: 20px;
+		scale: 0.1;
+	}
+
+	#d {
+		position: absolute;
+		top: 170px;
+		left: 0;
+	}
+
+	#b {
+		position: absolute;
+		top: 70px;
+		left: 300px;
+		/* transform: rotateZ(180deg); */
+	}
+
+	.box {
+		position: relative;
+		transform-style: preserve-3d;
+		transition: transform 1s;
+	}
+
+	.box.show-front {
+		transform: translateZ(-50px) rotateY(0deg);
+	}
+	.box.show-back {
+		transform: translateZ(-50px) rotateY(-180deg);
+	}
+	.box.show-right {
+		transform: translateZ(-150px) rotateY(-90deg);
+	}
+	.box.show-left {
+		transform: translateZ(-150px) rotateY(90deg);
+	}
+	.box.show-top {
+		transform: translateZ(-100px) rotateX(-90deg);
+	}
+	.box.show-bottom {
+		transform: translateZ(-100px) rotateX(90deg);
+	}
+
+	.box__face {
+		position: absolute;
+		font-size: 40px;
+		font-weight: bold;
+		color: white;
+		text-align: center;
+	}
+
+	.box__face--front {
+		transform: translateZ(50px);
+	}
+
+	.box__face--right {
+		transform: rotateY(90deg) translateZ(150px);
+	}
+	.box__face--left {
+		transform: rotateY(-90deg) translateZ(150px);
+	}
+
+	.box__face--top {
+		transform: rotateX(90deg) translateZ(100px);
+	}
+	.box__face--bottom {
+		transform: rotateX(-90deg) translateZ(100px);
+	}
+
+	.one {
+		left: 188px;
+		position: absolute;
+		top: 0;
+		z-index: 4;
+	}
+
+	#b .one {
+		left: 46px;
+		position: absolute;
+		top: 51px;
+		z-index: 4;
+	}
+
+	.one.box {
+		width: 100px;
+		height: 100px;
+		transform-style: preserve-3d;
+		transform: translateX(-2px) translateY(-4px) rotateX(-20deg) rotateY(45deg);
+	}
+
+	.one .box__face--front,
+	.one .box__face--back {
+		width: 100px;
+		height: 200px;
+		line-height: 200px;
+	}
+
+	.one .box_face--right,
+	.one .box__face--left {
+		width: 100px;
+		height: 200px;
+		left: 100px;
+		line-height: 200px;
+	}
+
+	.one .box__face--top,
+	.one .box__face--bottom {
+		width: 100px;
+		height: 100px;
+		top: 50px;
+		line-height: 100px;
+	}
+
+	.one .box__face--front {
+		background: rgb(204, 204, 204);
+	}
+	.one .box__face--left {
+		background: rgb(127, 127, 127);
+	}
+	.one .box__face--top {
+		background: rgb(178, 178, 178);
+	}
+
+	.two {
+		position: absolute;
+		top: 210px;
+		left: 15px;
+		z-index: 3;
+	}
+
+	.two.box {
+		width: 300px;
+		height: 100px;
+		transform: rotateX(-20deg) rotateY(45deg);
+	}
+
+	.two .box__face--front {
+		width: 300px;
+		height: 100px;
+		line-height: 200px;
+	}
+
+	.two .box__face--left {
+		width: 100px;
+		height: 100px;
+		left: 100px;
+		line-height: 200px;
+	}
+
+	.two .box__face--top {
+		width: 300px;
+		height: 100px;
+		top: 50px;
+		line-height: 100px;
+	}
+
+	.two .box__face--front {
+		background: rgb(204, 204, 204);
+	}
+	.two .box__face--left {
+		background: rgb(127, 127, 127);
+	}
+	.two .box__face--top {
+		background: rgba(178, 178, 178);
+	}
+
+	.three {
+		left: 44px;
+		position: absolute;
+		top: 320px;
+		z-index: 1;
+	}
+
+	#b .three {
+		left: 185px;
+		top: 277px;
+	}
+
+	.three.box {
+		width: 100px;
+		height: 200px;
+		transform: rotateX(-20deg) rotateY(45deg);
+	}
+
+	.three .box__face--front,
+	.three .box__face--back {
+		width: 100px;
+		height: 200px;
+		line-height: 200px;
+	}
+
+	.three .box__face--right,
+	.three .box__face--left {
+		width: 100px;
+		height: 200px;
+		left: 100px;
+		line-height: 200px;
+	}
+
+	.three .box__face--top,
+	.three .box__face--bottom {
+		width: 100px;
+		height: 100px;
+		top: 50px;
+		line-height: 100px;
+	}
+
+	.three .box__face--front {
+		background: rgba(204, 204, 204);
+	}
+	.three .box__face--left {
+		background: rgba(127, 127, 127);
+	}
+	.three .box__face--top {
+		background: rgb(178, 178, 178);
+	}
+
+	.four {
+		position: absolute;
+		top: 381px;
+		left: 99px;
+	}
+
+	#b .four {
+		left: 30px;
+		top: 410px;
+		z-index: 5;
+	}
+
+	.four.box {
+		width: 200px;
+		height: 100px;
+		transform: rotateX(-20deg) rotateY(45deg);
+	}
+
+	.four .box__face--front {
+		width: 200px;
+		height: 100px;
+		line-height: 200px;
+	}
+
+	.four .box__face--left {
+		width: 100px;
+		height: 100px;
+		left: 100px;
+		line-height: 200px;
+	}
+
+	.four .box__face--top {
+		width: 200px;
+		height: 100px;
+		top: 50px;
+		line-height: 100px;
+	}
+
+	.four .box__face--front {
+		background: rgba(204, 204, 204);
+	}
+	.four .box__face--left {
+		background: rgba(127, 127, 127);
+	}
+	.four .box__face--top {
+		background: rgb(178, 178, 178);
+	}
+
+	#logo:hover .one .box__face--front,
+	#logo:hover .two .box__face--front,
+	#logo:hover .three .box__face--front,
+	#logo:hover .four .box__face--front {
+		background: #b04304;
+	}
+	#logo:hover .one .box__face--left,
+	#logo:hover .two .box__face--left,
+	#logo:hover .three .box__face--left,
+	#logo:hover .four .box__face--left {
+		background: #53c683;
+	}
+	#logo:hover .one .box__face--top,
+	#logo:hover .two .box__face--top,
+	#logo:hover .three .box__face--top,
+	#logo:hover .four .box__face--top {
+		background: #ff5d01;
+	}
+</style>
+
+<script>
+	import { toggleClass } from "@/utils/domElement";
+
+	class MobileNavBtn extends HTMLElement {
+		#menuOpen: boolean = false;
+
+		connectedCallback() {
+			const headerEl = document.getElementById("main-header")!;
+			const mobileButtonEl = this.querySelector<HTMLButtonElement>("button");
+
+			mobileButtonEl?.addEventListener("click", () => {
+				if (headerEl) toggleClass(headerEl, "menu-open");
+				this.#menuOpen = !this.#menuOpen;
+				mobileButtonEl.setAttribute("aria-expanded", this.#menuOpen.toString());
+			});
+		}
+	}
+
+	customElements.define("mobile-button", MobileNavBtn);
+</script>
