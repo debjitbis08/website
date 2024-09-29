@@ -126,11 +126,18 @@ const url = new URL(Astro.request.url);
 <style>
 	#logo {
 		position: absolute;
-		top: -60px;
+		top: -50px;
 		left: -90px;
 		perspective: 500px;
 		padding: 20px;
-		scale: 0.1;
+		scale: 0.08;
+	}
+
+	.social-card #logo {
+		position: relative;
+		top: 0;
+		left: 0;
+		scale: 0.5;
 	}
 
 	#d {
@@ -200,7 +207,7 @@ const url = new URL(Astro.request.url);
 	.one {
 		left: 188px;
 		position: absolute;
-		top: 0;
+		top: 2px;
 		z-index: 4;
 	}
 
@@ -297,13 +304,13 @@ const url = new URL(Astro.request.url);
 	.three {
 		left: 44px;
 		position: absolute;
-		top: 320px;
+		top: 319px;
 		z-index: 1;
 	}
 
 	#b .three {
 		left: 185px;
-		top: 277px;
+		top: 275px;
 	}
 
 	.three.box {
@@ -384,10 +391,10 @@ const url = new URL(Astro.request.url);
 	}
 
 	.four .box__face--front {
-		background: rgba(204, 204, 204);
+		background: rgb(204, 204, 204);
 	}
 	.four .box__face--left {
-		background: rgba(127, 127, 127);
+		background: rgb(127, 127, 127);
 	}
 	.four .box__face--top {
 		background: rgb(178, 178, 178);
@@ -397,13 +404,13 @@ const url = new URL(Astro.request.url);
 	#logo:hover .two .box__face--front,
 	#logo:hover .three .box__face--front,
 	#logo:hover .four .box__face--front {
-		background: #b04304;
+		background: #53c683;
 	}
 	#logo:hover .one .box__face--left,
 	#logo:hover .two .box__face--left,
 	#logo:hover .three .box__face--left,
 	#logo:hover .four .box__face--left {
-		background: #53c683;
+		background: #b04304;
 	}
 	#logo:hover .one .box__face--top,
 	#logo:hover .two .box__face--top,
