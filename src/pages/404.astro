@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import aboutImg from "@/assets/about-astro.png";
+import Image404 from "@/assets/404-lost-in-space.svg";
 import PageLayout from "@/layouts/Base.astro";
 
 const meta = {
@@ -15,9 +16,14 @@ const meta = {
 	<div class="my-4 grid justify-center">
 		<Image
 			alt="A cartoon cactus looking at the 'Astro.build' logo"
-			class="rotate-180"
 			loading="eager"
-			src={aboutImg}
+			src={Image404}
 		/>
+		<p class="text-center text-xs opacity-30">
+			<a
+				href="https://www.freepik.com/free-vector/404-error-lost-space-concept-illustration_20824296.htm#query=404%20error%20illustration&position=28&from_view=keyword&track=ais_hybrid&uuid=19bf0aad-f670-4bfb-babd-faca3ce8f93a"
+				>Image by storyset</a
+			> on Freepik
+		</p>
 	</div>
 </PageLayout>
