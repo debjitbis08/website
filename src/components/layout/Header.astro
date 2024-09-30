@@ -6,7 +6,7 @@ import ThemeToggle from "../ThemeToggle.astro";
 const url = new URL(Astro.request.url);
 ---
 
-<header class="group relative mb-28 flex items-center" id="main-header">
+<header class="group relative mb-16 flex items-center lg:mb-28" id="main-header">
 	<div class="flex items-center gap-2">
 		<a
 			aria-current={url.pathname === "/" ? "page" : false}
