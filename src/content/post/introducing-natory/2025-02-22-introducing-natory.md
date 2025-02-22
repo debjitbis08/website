@@ -1,5 +1,5 @@
 ---
-title: "I Made a Game – ℕatory"
+title: "I Made a Game – Natory"
 description: "A childhood number game turned into Natory—a simple, creative math game about discovering patterns. 🎲✨"
 publishDate: "22 Feb 2025"
 tags: ["project", "game", "natory"]
