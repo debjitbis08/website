@@ -2,6 +2,7 @@
 title: "Happy Birthday to Me"
 description: "It's my 23rd birdthday."
 publishDate: "19 Jan 2009"
+updatedDate: "19 Jan 2009"
 tags: ["personal", "quirky"]
 ---
 
