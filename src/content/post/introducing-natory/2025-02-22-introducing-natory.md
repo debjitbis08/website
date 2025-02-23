@@ -3,7 +3,7 @@ title: "I Made a Game – Natory"
 description: "A childhood number game turned into Natory—a simple, creative math game about discovering patterns. 🎲✨"
 publishDate: "22 Feb 2025"
 updatedDate: "23 Feb 2025"
-ogImage: "./natory-screen.png"
+ogImage: "/natory-screen.png"
 tags: ["project", "game", "natory"]
 ---
 
