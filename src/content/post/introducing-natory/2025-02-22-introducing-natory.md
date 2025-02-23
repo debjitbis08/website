@@ -2,6 +2,7 @@
 title: "I Made a Game – Natory"
 description: "A childhood number game turned into Natory—a simple, creative math game about discovering patterns. 🎲✨"
 publishDate: "22 Feb 2025"
+updatedDate: "23 Feb 2025"
 ogImage: "./natory-screen.png"
 tags: ["project", "game", "natory"]
 ---
@@ -19,6 +20,8 @@ Of course, replacing x with π, gives the famous e<sup>iπ</sup> = -1
 That moment was both humbling and fascinating. I don’t remember exactly what I had discovered, but I do remember the thrill of finding something unexpected. Unfortunately, the teacher of the next class did not like the fact that I had not taken his permission to talk to my math teacher during his class. 😅
 
 ![e: The Story of a Number Book Cover](./e-the-story-of-number-cover.jpg)
+
+One fascinating class of numbers is [Friedman numbers](https://erich-friedman.github.io/mathmagic/0800.html), numbers that can be expressed using their own digits together with the symbols + – × / ^ ( ) and concatenation, in a meaningful equation. Such as 25 = 5² or 126 = 21 × 6. The interesting thing is that Erich Friedman introduced these numbers around the year 2000. At the same time I was doing something very similar, completely unaware of their existence. I only came across Friedman numbers a couple of years ago. It was a nice feeling that something similar was being studied by others, that the child me was exploring.
 
 At some point during those years, I had borrowed [The Penguin Dictionary of Curious and Interesting Numbers](https://en.wikipedia.org/wiki/The_Penguin_Dictionary_of_Curious_and_Interesting_Numbers) from my local library. It was one of the books that deepened my fascination with numbers. It was filled with strange and wonderful properties of numbers, which I loved exploring. Looking back, I believe that book played a significant role in inspiring what eventually became [ℕatory](https://playnatory.com).
 
