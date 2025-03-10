@@ -1,52 +1,48 @@
 ---
-title: "Understanding Tagless Final in Typescript - Part 1"
-description: ""
+title: "Understanding Tagless Final in TypeScript - Part 1"
+description: "I revisit typed tagless final interpreters—a technique I found fascinating years ago—to deepen my understanding using TypeScript examples."
 publishDate: "11 Mar 2025"
-tags: ["dsl", edsl", "typescript", "functional programming"]
-draft: true
+tags: ["dsl", "edsl", "typescript", "functional programming"]
 ---
 
-Few years ago, I had to solve the problem of creating a service to generate some JavaScript code from data.
-It was a rewrite and improvement of the existing service. The existing service was creating code using string
-manipulation and lot of conditionals. Trying to understand the code was extremely difficult. I needed to
+A few years ago, I was tasked with rewriting and improving a service that generated JavaScript code from structured data.
+The original implementation relied heavily on string
+manipulation and numerous conditionals, making it challenging to understand and maintain the code generation logic. I needed to
 understand the existing code, as I had to carry over a lot the existing logic too. This experience made
 me realize I can't do this using string manipulation. One of the core requirements I added was that the whole
-flow of the overall generated code should be readable. Even with the conditional code, people should not have any
-issues understanding the high level structure of the generated code. This led to the rabbit hole of DSLs and EDSLs.
+flow of the overall generated code should be easy to read and understand. Even with the conditional code, people should not have any
+issues understanding the high level structure of the generated code from the generating code. This requirement led me down the fascinating rabbit hole of Domain-Specific Languages (DSLs) and Embedded Domain-Specific Languages (EDSLs).
 
-I knew at the time that Haskell is a really nice language to build EDSLs. I had done some practice programming in
-OCaml and Haskell but never built anything significant. Considering this and also the team's capabilities I decided
-to start writing something in Typescript, using something what we will discuss later as "initial" encoding. I was able
-to get something working, but the language just did not feel right for the task. So I dicussed with few members
-in the team and decided to go for Haskell. Finally, after shuffling through lot of stuff, I ended up on this page,
-[https://okmij.org/ftp/tagless-final/index.html](https://okmij.org/ftp/tagless-final/index.html). I think the
-page wasn't organized the way it is today, but the technique presented just blew me away.
+I knew at the time that Haskell is a wonderful language to build EDSLs. I had little experience in
+OCaml and Haskell from some courses but had never built anything significant. Considering this and also the team's capabilities I decided
+to start writing something in TypeScript, using something what we will discuss later as "initial" embedding. I was able
+to get something working, but the language just did not feel right for the task. So I discussed with few members
+in the team and decided to go for Haskell. Eventually, after extensive exploration, I discovered Oleg Kiselyov's
+excellent page about his numerous papers on tagless final approach [https://okmij.org/ftp/tagless-final/index.html](https://okmij.org/ftp/tagless-final/index.html). I think the page wasn't organized the way it is today, but the technique presented just blew me away.
 
-Now I am revisiting the paper that I based my implementation on that time and hope to go much deeper and understand
+Now I am revisiting the [lecture notes](https://okmij.org/ftp/tagless-final/course/lecture.pdf) that I based my implementation on that time and hope to go much deeper and understand
 all the stuff that I had skipped earlier. Having no theoretical knowledge of many of the concepts such as type systems
-it is a bit difficult for me to fully grasp all the finer points, but I hope to understand and learn those basics
+it is a bit difficult for me to completely grasp all the finer points, but I hope to understand and learn some of those basics
 as I go along.
 
-I decided to do this set of posts with Typescript instead of Haskell as it will force me to understand some of the code
-in a deeper way. Also, Typescript does not have capabilities, such as higher-order polymorphism, to implement this
-technique elegantly, but I hope this difficulty will only make my understanding better. Use Typescript also make this
-more accessible to many more people and hopefully they will remember this approach if and when they need this.
+I decided to do this set of posts with TypeScript instead of Haskell as it will force me to understand some of the code
+in a deeper way. Also, TypeScript does not have some capabilities, such as higher-order polymorphism, to implement this
+approach elegantly, but I hope this difficulty will only make my understanding better. Additionally, using TypeScript makes this material accessible to a broader audience, who may find these powerful techniques useful in their own projects.
 
-In this series of posts, I will walk through the paper in detail and thus most examples and the flow will be directly referenced
-from the paper.
+In this post, I'll explore how to implement typed tagless final interpreters in TypeScript, closely following the
+[excellent notes provided by Oleg Kiselyov](https://okmij.org/ftp/tagless-final/course/lecture.pdf). By translating these
+concepts into TypeScript, we'll aim to make the ideas clear, practical, and approachable, even if you're encountering
+tagless final interpreters for the first time.
 
-## Why write a EDSL?
+## Why Write an EDSL?
 
-Domain specific languages (DLSs) have many applications[^1]. Some examples can be writing test cases, lightweight language
-for domain experts, parser generators and many other.
+Domain-Specific Languages (DSLs) are widely applicable and useful in various contexts[^1]. Common use cases include writing test cases, creating lightweight languages for domain experts, building parser generators, and many other specialized tasks.
+
+Embedded Domain-Specific Languages (EDSLs) can often provide even greater benefits, as they leverage the existing compiler infrastructure and ecosystem of the host language. This can simplify development, especially when the intended users of the DSL are developers themselves.
+
+Rather than covering DSLs in detail here, I recommend exploring some of the excellent resources linked under the "Further Reading" and "External Links" sections on the [DSL Wikipedia page](https://en.wikipedia.org/wiki/Domain-specific_language).
 
 [^1]: https://en.wikipedia.org/wiki/Domain-specific_language
-
-EDSLs can be even better in some cases as much of the language compiler chain can be handled by the host language. If building
-a DSL which will be used by developers itself, sometimes an EDSL can be very effective.
-
-I won't write about this much, and I suggest you read some of the material linked in the further reading and external links
-section of the DSL Wikipedia page.
 
 ## A simple language
 
@@ -55,17 +51,17 @@ integer literals, negation and addition of two integers.
 
 Example, we should be able to write the following in our language, `8 + (-2)`.
 
-Once we have written some 'code' in our language, we should be able to evaluate the code and also pretty print it. Which means,
-we should have to write two _interpreters_[^2] for our language.
+Once we have written some 'code' in our language, we should be able to evaluate the code and also pretty print it. This means,
+we need to write two different _interpreters_[^2] for our language.
 
-[^2]: Defined interpreter from SICP
+[^2]: A procedure or program that directly evaluates and executes expressions written in a programming language, thereby giving meaning to those expressions.
 
 ## Initial Embedding
 
 We can use a sum type[^3] where each term will be an element of the syntax. Unfortunately, what is just a single line in Haskell,
-in Typescript requires us to create the constructor functions on our own. We could also the OO way, but I am not going to.
+in TypeScript requires us to create the constructor functions on our own. We could also the Object oriented way, but I am not going to.
 
-[^3]: Talk about Algebraic Data Types
+[^3]: Sum types are type of Algebraic Data Types (ADTs). ADTs are composite types used in functional programming languages, allowing complex data structures to be defined by combining simpler types through operations such as sums (variants) and products (records or tuples).
 
 ```typescript
 type Exp =
@@ -159,7 +155,7 @@ console.log(head(x));
 console.log(tail(x));
 ```
 
-Using similar idea for our arithmetic language. We can write,
+This idea of representing language constructs using functions rather than algebraic data types serves as inspiration for the embedding we'll explore next. Notice how, in our arithmetic example below, each function directly encodes the meaning of language terms:
 
 ```typescript
 type Repr = number;
@@ -179,12 +175,10 @@ const mul = (e1: Repr, e2: Repr): Repr => e1 * e2;
 console.log(mul(lit(8), neg(lit(2))));
 ```
 
-The one flaw is that we have lost the ability to specify multiple interpreters. We an evaluate any expression, but pretty printing
+The one flaw is that we have lost the ability to specify multiple interpreters. We can evaluate any expression, but pretty printing
 is not possible anymore.
 
-To solve this problem, these functions need to return a type that's parametrized. These functions are working with expressions, so
-our type is `Expr` but not just that, the `Expr` type must be parametrized to handle multiple interpreters. Such as, `Expr<number>`
-for evaluation and `Expr<string>` for pretty printing. The way to do this Typescript is a bit convoluted,
+To address this limitation, each function should return a representation whose value is determined only during interpretation but the meaning is encoded in the function. Instead of directly computing numeric values, our functions should build abstract expressions parametrized by their interpretation. For instance, we might have `Expr<number>` for evaluation and `Expr<string>` for pretty-printing. In TypeScript, we can achieve this flexibility by defining a generic interface.
 
 ```typescript
 interface ExpSYM<R> {
@@ -194,16 +188,9 @@ interface ExpSYM<R> {
 }
 ```
 
-But this does not give us the constructors automatically. If some instance of this interface is created then our constructor functions,
-should use it and we should be able to specify this instance to use.
+However, this interface alone doesn't directly provide us with constructor functions. To solve this, we need a way to define our constructors so that they explicitly depend on a given interpreter instance, allowing us to specify the interpreter we want to use.
 
 ```typescript
-const NumberExpSYM: ExpSYM<number> = {
-	lit: (n) => n,
-	neg: (e) => -e,
-	add: (e1, e2) => e1 + e2,
-};
-
 const lit =
 	<R, I extends ExpSYM<R>>(n: number) =>
 	(interpreter: I) =>
@@ -220,6 +207,12 @@ const add =
 	(interpreter: I) =>
 		interpreter.add(e1(interpreter), e2(interpreter));
 
+const NumberExpSYM: ExpSYM<number> = {
+	lit: (n) => n,
+	neg: (e) => -e,
+	add: (e1, e2) => e1 + e2,
+};
+
 const tf1 = add(lit(8), neg(lit(2)));
 
 const eval_ = (x) => x;
@@ -227,7 +220,7 @@ const eval_ = (x) => x;
 console.log(eval_(tf1)(NumberExpSYM)); // Prints 6
 ```
 
-If you look closely we are building a large function from the smaller one which finally get evaluated when we pass `NumberExpSYM` to the resulting
+If you look closely we are building a large function from the smaller one which finally gets evaluated when we pass `NumberExpSYM` interpreter to the resulting
 expression function.
 
 ### Adding New Interpreter - Pretty Printer
@@ -246,7 +239,7 @@ console.log(eval_(tf1)(StringExpSYM)); // Prints (8 + (-2))
 
 ### Adding New Syntax - Multiplication
 
-Now to extend the language using `mul`.
+Now we extend the language using `mul`.
 
 ```typescript
 interface MulSYM<R> {
@@ -280,4 +273,4 @@ console.log(eval_(tf2)({ ...StringExpSYM, ...StringMulSYM }));
 
 Finally we have extended the language in both ways without breaking or updating any earlier code.
 
-This covers the [paper](https://okmij.org/ftp/tagless-final/course/lecture.pdf) till section 2.2. Rest of the sections of the paper will be covered in later posts.
+This covers the [notes](https://okmij.org/ftp/tagless-final/course/lecture.pdf) till section 2.2. Rest of the sections of the paper will be covered in later posts. Some of the interesting things in the future posts are, serialization, typed DSLs and optimizations.
